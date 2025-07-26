@@ -1,4 +1,4 @@
-"using strict";
+"use strict";
 
 export default class Project {
   #id = crypto.randomUUID();
@@ -33,5 +33,9 @@ export default class Project {
         this.#todos.splice(index, 1);
       }
     }
+  }
+
+  createTodoItem(todoItem) {
+    this.#todos.push(todoItem);
   }
 }
