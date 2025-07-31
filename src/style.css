@@ -9,3 +9,8 @@
   margin: 0 auto;
   border: 1px solid black;
 }
+
+ol,
+ul {
+  list-style: none;
+}
