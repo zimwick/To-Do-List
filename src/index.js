@@ -1,7 +1,5 @@
 "use strict";
 import "./style.css";
-import Project from "./project.js";
-import TodoItem from "./todo-item.js";
-import project1 from "./seed-data.js";
+import displayController from "./display-controller.js";
 
-console.log(project1);
+displayController();

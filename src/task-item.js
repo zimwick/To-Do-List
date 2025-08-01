@@ -1,6 +1,6 @@
 "use strict";
 
-export default class TodoItem {
+export default class TaskItem {
   #id = crypto.randomUUID();
   #title;
   #description;

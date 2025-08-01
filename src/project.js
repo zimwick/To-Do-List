@@ -3,39 +3,43 @@
 export default class Project {
   #id = crypto.randomUUID();
   #title;
-  #todos;
-  constructor(title, todos) {
+  #tasks;
+  constructor(title, tasks) {
     this.#title = title;
-    this.#todos = todos ?? [];
+    this.#tasks = tasks ?? [];
   }
 
   getTitle() {
     return this.#title;
   }
 
-  getTodos() {
-    return this.#todos;
+  getId() {
+    return this.#id;
   }
 
-  getTodoItem(todoId) {
-    const item = this.#todos.find((todoItem) => todoItem.getId() === todoId);
+  getTasks() {
+    return this.#tasks;
+  }
+
+  getTaskItem(todoId) {
+    const item = this.#tasks.find((taskItem) => taskItem.getId() === taskId);
     if (!item) {
       console.warn("Todo item not found");
     }
     return item;
   }
 
-  deleteTodoItem(todoId) {
-    const item = this.getTodoItem(todoId);
+  deleteTodoItem(taskId) {
+    const item = this.getTaskItem(taskId);
     if (item) {
-      const index = this.#todos.indexOf(item);
+      const index = this.#tasks.indexOf(item);
       if (index !== -1) {
-        this.#todos.splice(index, 1);
+        this.#tasks.splice(index, 1);
       }
     }
   }
 
-  createTodoItem(todoItem) {
-    this.#todos.push(todoItem);
+  createTodoItem(taskItem) {
+    this.#tasks.push(taskItem);
   }
 }
