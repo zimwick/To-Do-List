@@ -1,16 +1,17 @@
 "use strict";
 
 const projectView = function (title, id) {
-  const html = `
-  <li class="project-container" data-id="${id}">
-    <h3 class="project-title">${title}</h3>
-    <ol class="project-tasks-list">
+  const li = document.createElement("li");
+  li.classList.add("project-container");
+  li.dataset.projectId = id;
 
-    </ol>
+  li.innerHTML = `
+    <h3 class="project-title">${title}</h3>
+    <ol class="project-tasks-list"></ol>
     <button class="add-task-btn">Add task</button>
-  </li>
   `;
-  return html;
+
+  return li;
 };
 
 export default projectView;

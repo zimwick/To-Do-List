@@ -6,12 +6,12 @@ const DOMMapper = {
   },
 
   tasksList(projectId) {
-    const project = document.querySelector(`[data-id="${projectId}"]`);
+    const project = document.querySelector(`[data-project-id="${projectId}"]`);
     return project.querySelector("ol");
   },
 
   task(taskId) {
-    return document.querySelector(`[data-id="${taskId}"]`);
+    return document.querySelector(`[data-task-id="${taskId}"]`);
   },
 
   taskCheckBox(taskId) {

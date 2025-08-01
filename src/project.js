@@ -3,10 +3,10 @@
 export default class Project {
   #id = crypto.randomUUID();
   #title;
-  #tasks;
+  #tasks = [];
   constructor(title, tasks) {
     this.#title = title;
-    this.#tasks = tasks ?? [];
+    this.#tasks = tasks;
   }
 
   getTitle() {
@@ -18,10 +18,18 @@ export default class Project {
   }
 
   getTasks() {
-    return this.#tasks;
+    const priorityOrder = {
+      High: 3,
+      Medium: 2,
+      Low: 1,
+    };
+
+    return [...this.#tasks].sort(
+      (a, b) => priorityOrder[b.getPriority()] - priorityOrder[a.getPriority()]
+    );
   }
 
-  getTaskItem(todoId) {
+  getTaskItem(taskId) {
     const item = this.#tasks.find((taskItem) => taskItem.getId() === taskId);
     if (!item) {
       console.warn("Todo item not found");

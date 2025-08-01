@@ -7,8 +7,11 @@ const taskView = function (
   notes,
   finished
 ) {
-  const html = `
-    <li class="task-container" data-id="${id}">
+  const li = document.createElement("li");
+  li.classList.add("task-container");
+  li.dataset.taskId = id;
+
+  li.innerHTML = `
         <input type="checkbox" id="${id}" ${finished ? "checked" : ""} />
         <label for="${id}">
           <p class="task-title">${title}</p>
@@ -29,9 +32,8 @@ const taskView = function (
         <p class="notes">
           <strong>Notes:</strong> ${notes}
         </p>
-    </li>
   `;
-  return html;
+  return li;
 };
 
 export default taskView;
