@@ -5,8 +5,12 @@ const DOMMapper = {
     return document.querySelector(".projects-list");
   },
 
+  project(projectId) {
+    return document.querySelector(`[data-project-id="${projectId}"]`);
+  },
+
   tasksList(projectId) {
-    const project = document.querySelector(`[data-project-id="${projectId}"]`);
+    const project = this.project(projectId);
     return project.querySelector("ol");
   },
 
@@ -16,6 +20,14 @@ const DOMMapper = {
 
   taskCheckBox(taskId) {
     return this.task(taskId).querySelector('input[type="checkbox"]');
+  },
+
+  get addTaskBtns() {
+    return document.querySelectorAll(".add-task-btn");
+  },
+
+  get addTaskForm() {
+    return document.querySelector(".add-task-form");
   },
 };
 
