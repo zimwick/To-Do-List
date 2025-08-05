@@ -47,7 +47,7 @@ export default class Project {
     }
   }
 
-  createTodoItem(taskItem) {
+  createTaskItem(taskItem) {
     this.#tasks.push(taskItem);
   }
 }

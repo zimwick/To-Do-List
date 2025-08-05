@@ -17,7 +17,7 @@ const addTaskView = function (projectId) {
         <label for="taskdescript">Task description:</label>
         <input type="text" id="taskdescript" name="taskdescript" />
         <label for="tasknotes">Task notes:</label>
-        <input type="text" id="task-notes" name="tasknotes" />
+        <input type="text" id="tasknotes" name="tasknotes" />
         <input type="submit" dataproject-id="${projectId}" value="save" />
     </form>
   `;

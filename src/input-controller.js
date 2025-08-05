@@ -1,6 +1,9 @@
 "use strict";
 import DOMMapper from "./dom-mapper";
 import addTaskView from "./add-task-view";
+import projectList from "./project-list";
+import TaskItem from "./task-item";
+import displayController from "./display-controller";
 
 const inputController = function () {
   DOMMapper.addTaskBtns.forEach((btn) => {
@@ -13,12 +16,30 @@ const inputController = function () {
         e.preventDefault();
 
         const form = e.target;
-        taskName = form.elements.taskname.value;
-        taskDesc = form.elements.taskdesc.value;
-        taskDate = form.elements.duedate.value;
+        const taskName = form.elements.taskname.value;
+        const taskDate = form.elements.duedate.value;
+        const taskPriority = form.elements.priority.value;
+        const taskDescription = form.elements.taskdescript.value;
+        const taskNotes = form.elements.tasknotes.value;
 
-        const task = new Task(taskName);
-        console.log(form.elements.taskname.value);
+        const task = new TaskItem(
+          taskName,
+          taskDescription,
+          taskDate,
+          taskPriority,
+          taskNotes
+        );
+
+        //add task to project
+        projectList
+          .find(
+            (project) =>
+              project.getId() === DOMMapper.addTaskForm.dataset.projectId
+          )
+          .createTaskItem(task);
+
+        //update dom
+        displayController();
       });
     });
   });
