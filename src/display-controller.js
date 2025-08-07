@@ -1,10 +1,9 @@
 "use strict";
 import projectView from "./project-view";
 import DOMMapper from "./dom-mapper";
-import projectList from "./project-list";
 import taskView from "./task-view";
 import inputController from "./input-controller";
-import { getStorage } from "./storage-controller";
+import { getStorage, updateStorage } from "./storage-controller";
 
 const displayController = function () {
   //clear dom so it can re-render for updates
@@ -13,7 +12,7 @@ const displayController = function () {
   }
 
   //re-render dom
-  projectList.forEach((project) => {
+  getStorage().forEach((project) => {
     DOMMapper.projectsList.appendChild(
       projectView(project.getTitle(), project.getId())
     );

@@ -17,6 +17,10 @@ export default class Project {
     return this.#id;
   }
 
+  setId(id) {
+    this.#id = id;
+  }
+
   getTasks() {
     //also sets priority order
     const priorityOrder = {

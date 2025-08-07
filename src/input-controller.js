@@ -1,12 +1,13 @@
 "use strict";
 import DOMMapper from "./dom-mapper";
 import addTaskView from "./add-task-view";
-import projectList from "./project-list";
 import TaskItem from "./task-item";
 import displayController from "./display-controller";
-import { updateStorage } from "./storage-controller";
+import { getStorage, updateStorage } from "./storage-controller";
 
 const inputController = function () {
+  //clear dom so it can re-render for updates
+
   DOMMapper.addTaskBtns.forEach((btn) => {
     btn.addEventListener("click", function () {
       DOMMapper.project(btn.dataset.projectId).appendChild(
@@ -31,15 +32,16 @@ const inputController = function () {
           taskNotes
         );
 
+        console.log(getStorage());
         //add task to project
-        projectList
+        getStorage()
           .find(
             (project) =>
               project.getId() === DOMMapper.addTaskForm.dataset.projectId
           )
           .createTaskItem(task);
 
-        //save task and update DOM
+        //save new data and update DOM
         updateStorage();
         displayController();
       });
