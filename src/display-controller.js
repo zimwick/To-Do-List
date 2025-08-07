@@ -4,6 +4,7 @@ import DOMMapper from "./dom-mapper";
 import projectList from "./project-list";
 import taskView from "./task-view";
 import inputController from "./input-controller";
+import { getStorage } from "./storage-controller";
 
 const displayController = function () {
   //clear dom so it can re-render for updates

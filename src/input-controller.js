@@ -4,6 +4,7 @@ import addTaskView from "./add-task-view";
 import projectList from "./project-list";
 import TaskItem from "./task-item";
 import displayController from "./display-controller";
+import { updateStorage } from "./storage-controller";
 
 const inputController = function () {
   DOMMapper.addTaskBtns.forEach((btn) => {
@@ -38,7 +39,8 @@ const inputController = function () {
           )
           .createTaskItem(task);
 
-        //update dom
+        //save task and update DOM
+        updateStorage();
         displayController();
       });
     });

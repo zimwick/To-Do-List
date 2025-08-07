@@ -18,6 +18,7 @@ export default class Project {
   }
 
   getTasks() {
+    //also sets priority order
     const priorityOrder = {
       High: 3,
       Medium: 2,
@@ -49,5 +50,13 @@ export default class Project {
 
   createTaskItem(taskItem) {
     this.#tasks.push(taskItem);
+  }
+
+  toJSON() {
+    return {
+      id: this.getId(),
+      title: this.getTitle(),
+      tasks: this.getTasks(),
+    };
   }
 }

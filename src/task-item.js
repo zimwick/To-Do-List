@@ -69,4 +69,16 @@ export default class TaskItem {
   setFinished() {
     this.#finished = true;
   }
+
+  toJSON() {
+    return {
+      id: this.getId(),
+      title: this.getTitle(),
+      description: this.getDescription(),
+      duedate: this.getDueDate(),
+      priority: this.getPriority(),
+      notes: this.getNotes(),
+      finished: this.getFinished(),
+    };
+  }
 }
