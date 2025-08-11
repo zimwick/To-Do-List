@@ -29,6 +29,14 @@ const DOMMapper = {
   get addTaskForm() {
     return document.querySelector(".add-task-form");
   },
+
+  get addProjectForm() {
+    return document.querySelector(".create-project-form");
+  },
+
+  get newProjectBtn() {
+    return document.querySelector(".new-project-btn");
+  },
 };
 
 export default DOMMapper;

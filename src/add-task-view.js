@@ -1,9 +1,9 @@
-const addTaskView = function (projectId) {
+const addTaskView = function () {
   const div = document.createElement("div");
   div.classList.add("create-task-container");
 
   div.innerHTML = `
-    <form class="add-task-form" data-project-id="${projectId}">
+    <form class="add-task-form">
         <label for="taskname">Task name:</label>
         <input type="text" id="taskname" name="taskname" />
         <label for="duedate">Due date:</label>
@@ -18,7 +18,7 @@ const addTaskView = function (projectId) {
         <input type="text" id="taskdescript" name="taskdescript" />
         <label for="tasknotes">Task notes:</label>
         <input type="text" id="tasknotes" name="tasknotes" />
-        <input type="submit" dataproject-id="${projectId}" value="save" />
+        <input type="submit" value="save" />
     </form>
   `;
   return div;

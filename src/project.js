@@ -3,8 +3,8 @@
 export default class Project {
   #id = crypto.randomUUID();
   #title;
-  #tasks = [];
-  constructor(title, tasks) {
+  #tasks;
+  constructor(title, tasks = []) {
     this.#title = title;
     this.#tasks = tasks;
   }

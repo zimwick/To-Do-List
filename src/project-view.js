@@ -8,7 +8,7 @@ const projectView = function (title, id) {
   li.innerHTML = `
     <h3 class="project-title">${title}</h3>
     <ol class="project-tasks-list"></ol>
-    <button class="add-task-btn" data-project-id="${id}">Add task</button>
+    <button class="add-task-btn">Add task</button>
   `;
 
   return li;

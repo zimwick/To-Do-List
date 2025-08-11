@@ -3,7 +3,7 @@ import projectView from "./project-view";
 import DOMMapper from "./dom-mapper";
 import taskView from "./task-view";
 import inputController from "./input-controller";
-import { getStorage, updateStorage } from "./storage-controller";
+import { getStorage } from "./storage-controller";
 
 const displayController = function () {
   //clear dom so it can re-render for updates
@@ -30,7 +30,6 @@ const displayController = function () {
       );
     });
   });
-
   //remap event listeners
   inputController();
 };
