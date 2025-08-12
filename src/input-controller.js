@@ -31,6 +31,12 @@ const inputController = function () {
   DOMMapper.projects.forEach((project) => {
     const projectId = project.dataset.projectId;
 
+    //select current project object
+    const projectSelected = getStorage().find(
+      (project) => project.getId() === projectId
+    );
+
+    // add click events to add task buttons
     project
       .querySelector(".add-task-btn")
       .addEventListener("click", function () {
@@ -56,16 +62,28 @@ const inputController = function () {
           DOMMapper.addTaskForm.remove();
 
           //add task to project
-          const project = getStorage().find(
-            (project) => project.getId() === projectId
-          );
-          project.createTaskItem(task);
+          projectSelected.createTaskItem(task);
 
           //save new data and update DOM
-          updateStorage(project.toJSON());
+          updateStorage(projectSelected.toJSON());
           displayController();
         });
       });
+
+    // add click events to each task delete button
+    project.querySelectorAll(".task-container").forEach((task) => {
+      const taskSelected = projectSelected.getTaskItem(task.dataset.taskId);
+
+      task
+        .querySelector(".del-task-btn")
+        .addEventListener("click", function () {
+          projectSelected.deleteTodoItem(taskSelected.getId());
+
+          //save new data and update DOM
+          updateStorage(projectSelected.toJSON());
+          displayController();
+        });
+    });
   });
 };
 

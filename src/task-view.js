@@ -32,6 +32,8 @@ const taskView = function (
         <p class="notes">
           <strong>Notes:</strong> ${notes}
         </p>
+
+        <button class="del-task-btn">Delete</button>
   `;
   return li;
 };
