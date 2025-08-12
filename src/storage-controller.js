@@ -10,10 +10,10 @@ const updateStorage = function (project) {
 
   //checking if project already exists in storage if so remove it
   if (index !== -1) {
-    projectList.splice(index, 1);
+    projectList[index] = project;
+  } else {
+    projectList.push(project);
   }
-  projectList.push(project);
-
   //re-adding updated project back to storage
   localStorage.setItem("projects", JSON.stringify(projectList));
 };

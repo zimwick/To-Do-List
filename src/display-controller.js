@@ -2,7 +2,7 @@
 import projectView from "./project-view";
 import DOMMapper from "./dom-mapper";
 import taskView from "./task-view";
-import inputController from "./input-controller";
+import { inputController } from "./input-controller";
 import { getStorage } from "./storage-controller";
 
 const displayController = function () {

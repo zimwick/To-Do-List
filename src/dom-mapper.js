@@ -5,6 +5,14 @@ const DOMMapper = {
     return document.querySelector(".projects-list");
   },
 
+  get projects() {
+    return document.querySelectorAll(".project-container");
+  },
+
+  get projectsContainer() {
+    return document.querySelector(".projects-container");
+  },
+
   project(projectId) {
     return document.querySelector(`[data-project-id="${projectId}"]`);
   },

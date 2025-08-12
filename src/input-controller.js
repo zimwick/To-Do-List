@@ -7,9 +7,9 @@ import { getStorage, updateStorage } from "./storage-controller";
 import addProjectView from "./add-project-view";
 import Project from "./project";
 
-const inputController = function () {
+const initialEventListener = function () {
   DOMMapper.newProjectBtn.addEventListener("click", function () {
-    DOMMapper.projectsList.appendChild(addProjectView());
+    DOMMapper.projectsContainer.appendChild(addProjectView());
 
     DOMMapper.addProjectForm.addEventListener("submit", function (e) {
       e.preventDefault();
@@ -18,13 +18,17 @@ const inputController = function () {
       const projectName = form.elements.projectname.value;
       const project = new Project(projectName);
 
+      DOMMapper.addProjectForm.remove();
+
       updateStorage(project.toJSON());
       displayController();
     });
   });
+};
 
+const inputController = function () {
   //parse through every project and add event listeners
-  [...DOMMapper.projectsList.children].forEach((project) => {
+  DOMMapper.projects.forEach((project) => {
     const projectId = project.dataset.projectId;
 
     project
@@ -49,6 +53,7 @@ const inputController = function () {
             taskPriority,
             taskNotes
           );
+          DOMMapper.addTaskForm.remove();
 
           //add task to project
           const project = getStorage().find(
@@ -64,4 +69,4 @@ const inputController = function () {
   });
 };
 
-export default inputController;
+export { inputController, initialEventListener };
