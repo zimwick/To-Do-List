@@ -13,6 +13,26 @@ const DOMMapper = {
     return document.querySelector(".projects-container");
   },
 
+  delProjBtn(project) {
+    return project.querySelector(".del-proj-btn");
+  },
+
+  addTaskBtn(project) {
+    return project.querySelector(".add-task-btn");
+  },
+
+  taskContainer(project) {
+    return project.querySelectorAll(".task-container");
+  },
+
+  delTaskBtn(task) {
+    return task.querySelector(".del-task-btn");
+  },
+
+  taskCheckBox(task) {
+    return task.querySelector(".complete-checkbox");
+  },
+
   project(projectId) {
     return document.querySelector(`[data-project-id="${projectId}"]`);
   },
@@ -20,18 +40,6 @@ const DOMMapper = {
   tasksList(projectId) {
     const project = this.project(projectId);
     return project.querySelector("ol");
-  },
-
-  task(taskId) {
-    return document.querySelector(`[data-task-id="${taskId}"]`);
-  },
-
-  taskCheckBox(taskId) {
-    return this.task(taskId).querySelector('input[type="checkbox"]');
-  },
-
-  get addTaskBtns() {
-    return document.querySelectorAll(".add-task-btn");
   },
 
   get addTaskForm() {

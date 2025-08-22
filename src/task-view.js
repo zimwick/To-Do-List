@@ -12,9 +12,9 @@ const taskView = function (
   li.dataset.taskId = id;
 
   li.innerHTML = `
-        <input type="checkbox" class="complete-checkbox" ${
-          finished ? "checked" : ""
-        } />
+        <input type="checkbox" class="complete-checkbox" id="${id}" ${
+    finished ? "checked" : ""
+  } />
         <label for="${id}">
           <p class="task-title">${title}</p>
 

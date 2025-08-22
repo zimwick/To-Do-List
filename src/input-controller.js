@@ -7,6 +7,7 @@ import { deleteProject, getStorage, updateStorage } from "./storage-controller";
 import addProjectView from "./add-project-view";
 import Project from "./project";
 
+//should run once at first render
 const initialEventListener = function () {
   DOMMapper.newProjectBtn.addEventListener("click", function () {
     DOMMapper.projectsContainer.appendChild(addProjectView());
@@ -26,6 +27,7 @@ const initialEventListener = function () {
   });
 };
 
+//runs on each re-render
 const inputController = function () {
   //parse through every project and add event listeners
   DOMMapper.projects.forEach((project) => {
@@ -36,70 +38,62 @@ const inputController = function () {
       (project) => project.getId() === projectId
     );
 
-    project
-      .querySelector(".del-proj-btn")
-      .addEventListener("click", function () {
-        deleteProject(projectSelected.toJSON());
+    DOMMapper.delProjBtn(project).addEventListener("click", function () {
+      deleteProject(projectSelected.toJSON());
+      displayController();
+    });
+
+    // add click events to add task buttons
+    DOMMapper.addTaskBtn(project).addEventListener("click", function () {
+      project.appendChild(addTaskView(projectId));
+
+      DOMMapper.addTaskForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const form = e.target;
+        const taskName = form.elements.taskname.value;
+        const taskDate = form.elements.duedate.value;
+        const taskPriority = form.elements.priority.value;
+        const taskDescription = form.elements.taskdescript.value;
+        const taskNotes = form.elements.tasknotes.value;
+
+        const task = new TaskItem(
+          taskName,
+          taskDescription,
+          taskDate,
+          taskPriority,
+          taskNotes
+        );
+        DOMMapper.addTaskForm.remove();
+
+        //add task to project
+        projectSelected.createTaskItem(task);
+
+        //save new data and update DOM
+        updateStorage(projectSelected.toJSON());
+        displayController();
+      });
+    });
+
+    // add click events to tasks
+    DOMMapper.taskContainer(project).forEach((task) => {
+      const taskSelected = projectSelected.getTaskItem(task.dataset.taskId);
+
+      DOMMapper.delTaskBtn(task).addEventListener("click", function () {
+        projectSelected.deleteTodoItem(taskSelected.getId());
+
+        //save new data and update DOM
+        updateStorage(projectSelected.toJSON());
         displayController();
       });
 
-    // add click events to add task buttons
-    project
-      .querySelector(".add-task-btn")
-      .addEventListener("click", function () {
-        project.appendChild(addTaskView(projectId));
+      DOMMapper.taskCheckBox(task).addEventListener("click", function () {
+        taskSelected.toggleFinished();
 
-        DOMMapper.addTaskForm.addEventListener("submit", function (e) {
-          e.preventDefault();
-
-          const form = e.target;
-          const taskName = form.elements.taskname.value;
-          const taskDate = form.elements.duedate.value;
-          const taskPriority = form.elements.priority.value;
-          const taskDescription = form.elements.taskdescript.value;
-          const taskNotes = form.elements.tasknotes.value;
-
-          const task = new TaskItem(
-            taskName,
-            taskDescription,
-            taskDate,
-            taskPriority,
-            taskNotes
-          );
-          DOMMapper.addTaskForm.remove();
-
-          //add task to project
-          projectSelected.createTaskItem(task);
-
-          //save new data and update DOM
-          updateStorage(projectSelected.toJSON());
-          displayController();
-        });
+        //save new data and update DOM
+        updateStorage(projectSelected.toJSON());
+        displayController();
       });
-
-    // add click events to tasks
-    project.querySelectorAll(".task-container").forEach((task) => {
-      const taskSelected = projectSelected.getTaskItem(task.dataset.taskId);
-
-      task
-        .querySelector(".del-task-btn")
-        .addEventListener("click", function () {
-          projectSelected.deleteTodoItem(taskSelected.getId());
-
-          //save new data and update DOM
-          updateStorage(projectSelected.toJSON());
-          displayController();
-        });
-
-      task
-        .querySelector(".complete-checkbox")
-        .addEventListener("click", function () {
-          taskSelected.toggleFinished();
-
-          //save new data and update DOM
-          updateStorage(projectSelected.toJSON());
-          displayController();
-        });
     });
   });
 };
