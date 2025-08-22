@@ -83,6 +83,16 @@ const inputController = function () {
           updateStorage(projectSelected.toJSON());
           displayController();
         });
+
+      task
+        .querySelector(".complete-checkbox")
+        .addEventListener("click", function () {
+          taskSelected.toggleFinished();
+
+          //save new data and update DOM
+          updateStorage(projectSelected.toJSON());
+          displayController();
+        });
     });
   });
 };

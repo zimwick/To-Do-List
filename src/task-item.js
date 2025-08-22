@@ -7,14 +7,15 @@ export default class TaskItem {
   #dueDate;
   #priority;
   #notes;
-  #finished = false;
+  #finished;
 
-  constructor(tile, description, duedate, priority, notes) {
+  constructor(tile, description, duedate, priority, notes, finished = false) {
     this.#title = tile;
     this.#description = description;
     this.#dueDate = duedate;
     this.#priority = priority;
     this.#notes = notes ?? "";
+    this.#finished = finished;
   }
 
   getId() {
@@ -72,6 +73,14 @@ export default class TaskItem {
 
   setFinished() {
     this.#finished = true;
+  }
+
+  toggleFinished() {
+    if (this.#finished === true) {
+      this.#finished = false;
+    } else {
+      this.#finished = true;
+    }
   }
 
   toJSON() {
