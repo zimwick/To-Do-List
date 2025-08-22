@@ -13,6 +13,10 @@ export default class Project {
     return this.#title;
   }
 
+  setTitle(title) {
+    this.#title = title;
+  }
+
   getId() {
     return this.#id;
   }

@@ -42,6 +42,26 @@ const DOMMapper = {
     return project.querySelector("ol");
   },
 
+  projectTitle(project) {
+    return project.querySelector(".project-title");
+  },
+
+  saveProjBtn(project) {
+    return project.querySelector(".save-proj-btn");
+  },
+
+  projectTitleInput(project) {
+    return project.querySelector(".projtitle");
+  },
+
+  editProjBtn(project) {
+    return project.querySelector(".edit-proj-btn");
+  },
+
+  editProjContainer(project) {
+    return project.querySelector(".edit-proj-container");
+  },
+
   get addTaskForm() {
     return document.querySelector(".add-task-form");
   },

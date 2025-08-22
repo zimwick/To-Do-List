@@ -38,6 +38,25 @@ const inputController = function () {
       (project) => project.getId() === projectId
     );
 
+    function toggleEditTitle() {
+      DOMMapper.projectTitle(project).classList.toggle("hide");
+      DOMMapper.editProjContainer(project).classList.toggle("hide");
+      DOMMapper.editProjBtn(project).classList.toggle("hide");
+    }
+
+    DOMMapper.editProjBtn(project).addEventListener("click", function () {
+      toggleEditTitle();
+      DOMMapper.projectTitleInput(project).value = projectSelected.getTitle();
+
+      DOMMapper.saveProjBtn(project).addEventListener("click", function () {
+        projectSelected.setTitle(DOMMapper.projectTitleInput(project).value);
+        toggleEditTitle();
+
+        updateStorage(projectSelected.toJSON());
+        displayController();
+      });
+    });
+
     DOMMapper.delProjBtn(project).addEventListener("click", function () {
       deleteProject(projectSelected.toJSON());
       displayController();
