@@ -3,7 +3,7 @@ import DOMMapper from "./dom-mapper";
 import addTaskView from "./add-task-view";
 import TaskItem from "./task-item";
 import displayController from "./display-controller";
-import { getStorage, updateStorage } from "./storage-controller";
+import { deleteProject, getStorage, updateStorage } from "./storage-controller";
 import addProjectView from "./add-project-view";
 import Project from "./project";
 
@@ -35,6 +35,13 @@ const inputController = function () {
     const projectSelected = getStorage().find(
       (project) => project.getId() === projectId
     );
+
+    project
+      .querySelector(".del-proj-btn")
+      .addEventListener("click", function () {
+        deleteProject(projectSelected.toJSON());
+        displayController();
+      });
 
     // add click events to add task buttons
     project
@@ -70,7 +77,7 @@ const inputController = function () {
         });
       });
 
-    // add click events to each task delete button
+    // add click events to tasks
     project.querySelectorAll(".task-container").forEach((task) => {
       const taskSelected = projectSelected.getTaskItem(task.dataset.taskId);
 

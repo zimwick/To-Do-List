@@ -18,6 +18,15 @@ const updateStorage = function (project) {
   localStorage.setItem("projects", JSON.stringify(projectList));
 };
 
+const deleteProject = function (project) {
+  let projectList = getStorage();
+  const index = projectList.findIndex((p) => p.getId() === project.id);
+  if (index !== -1) {
+    projectList.splice(index, 1);
+    localStorage.setItem("projects", JSON.stringify(projectList));
+  }
+};
+
 const getStorage = function () {
   //turn back into list of objects
   let projectList = [];
@@ -54,4 +63,4 @@ const seedData = function () {
   }
 };
 
-export { updateStorage, getStorage, seedData };
+export { updateStorage, getStorage, seedData, deleteProject };
